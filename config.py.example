@@ -1,0 +1,11 @@
+# Configuration settings for CryptoSocialSage
+
+# Claude API settings
+CLAUDE_API_KEY = "your_claude_api_key_here"
+
+# Application settings
+DEFAULT_NUM_TWEETS = 100
+DEFAULT_POSTS_PER_DAY = 3
+DEFAULT_SCHEDULE_DAYS = 7
+
+# Add any other configuration variables as needed
