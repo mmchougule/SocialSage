@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CryptoSocialSage</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        .input-group {
+            margin-bottom: 20px;
+        }
+        input, button {
+            font-size: 16px;
+            padding: 5px 10px;
+        }
+        #results {
+            white-space: pre-wrap;
+            background-color: #f0f0f0;
+            padding: 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>CryptoSocialSage</h1>
+    <div class="input-group">
+        <input type="text" id="symbol" placeholder="Enter cryptocurrency symbol (e.g., BTC)">
+        <button onclick="getData()">Get Data</button>
+        <button onclick="getSentiment()">Get Sentiment</button>
+        <button onclick="getSignals()">Get Signals</button>
+    </div>
+    <div id="results"></div>
+
+    <script>
+        async function fetchData(url, symbol) {
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `symbol=${symbol}`
+            });
+            return await response.json();
+        }
+
+        async function getData() {
+            const symbol = document.getElementById('symbol').value;
+            const data = await fetchData('/get_crypto_data', symbol);
+            document.getElementById('results').textContent = JSON.stringify(data, null, 2);
+        }
+
+        async function getSentiment() {
+            const symbol = document.getElementById('symbol').value;
+            const sentiment = await fetchData('/get_social_sentiment', symbol);
+            document.getElementById('results').textContent = JSON.stringify(sentiment, null, 2);
+        }
+
+        async function getSignals() {
+            const symbol = document.getElementById('symbol').value;
+            const signals = await fetchData('/get_trading_signals', symbol);
+            document.getElementById('results').textContent = JSON.stringify(signals, null, 2);
+        }
+    </script>
+</body>
+</html>

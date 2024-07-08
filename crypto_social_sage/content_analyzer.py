@@ -11,7 +11,7 @@ def analyze_content(query, num_tweets=DEFAULT_NUM_TWEETS):
     :return: dict, categorized tweets
     """
     tweets = get_simulated_tweets(query, 2) #num_tweets)
-    df = pd.DataFrame(tweets); df.show();print(df.head())
+    df = pd.DataFrame(tweets)
     
     # Basic categorization based on engagement metrics
     df['engagement'] = df['retweet_count'] + df['favorite_count']

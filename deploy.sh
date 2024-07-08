@@ -1,13 +1,29 @@
 #!/bin/bash
 
-# Build the Docker image
-docker build -t cryptosocialsage .
+# Exit immediately if a command exits with a non-zero status
+set -e
 
-# Stop and remove any existing container
-docker stop cryptosocialsage || true
-docker rm cryptosocialsage || true
+# Update system packages
+sudo apt-get update
+sudo apt-get upgrade -y
 
-# Run the new container
-docker run -d --name cryptosocialsage -p 8000:8000 cryptosocialsage
+# Install Python and pip if not already installed
+sudo apt-get install -y python3 python3-pip
 
-echo "CryptoSocialSage has been deployed and is running on port 8000"
+# Navigate to the project directory
+cd /path/to/CryptoSocialSage
+
+# Create and activate a virtual environment
+python3 -m venv venv
+source venv/bin/activate
+
+# Install required packages
+pip install -r requirements.txt
+
+# Set environment variables (if needed)
+# export API_KEY=your_api_key_here
+
+# Run the Streamlit app
+nohup streamlit run streamlit_app.py --server.port 8501 &
+
+echo "CryptoSocialSage Streamlit app is now running on port 8501"
