@@ -30,44 +30,44 @@ st.markdown("""
 content_scheduler = scheduler.ContentScheduler()
 
 def main():
-    st.title("CryptoSocialSage 🧠💰")
+    st.title("xSage 🧠💰")
 
-    menu = ["Analyze Trending Crypto Content", "Generate Tweet Ideas", "Schedule Posts", "View Scheduled Posts"]
+    menu = [" Crypto Content", "Generate Tweet Ideas", "Schedule Posts", "View Scheduled Posts"]
     choice = st.sidebar.selectbox("Choose an option", menu)
 
-    if choice == "Analyze Trending Crypto Content":
+    if choice == "what's hyped right now":
         analyze_trending_content()
-    elif choice == "Generate Tweet Ideas":
+    elif choice == "give me tweet ideas":
         generate_tweet_ideas()
-    elif choice == "Schedule Posts":
+    elif choice == "pencil my posts":
         schedule_posts()
-    elif choice == "View Scheduled Posts":
+    elif choice == "view my posts":
         view_scheduled_posts()
 
 def analyze_trending_content():
-    st.header("Analyze Trending Crypto Content")
-    query = st.text_input("Enter a search query for crypto content:")
-    if st.button("Analyze"):
-        with st.spinner("Analyzing content..."):
+    st.header("what's hyped in")
+    query = st.text_input("interests:")
+    if st.button("go"):
+        with st.spinner("asking agents..."):
             categorized_tweets = content_analyzer.analyze_content(query, DEFAULT_NUM_TWEETS)
-            st.subheader("Categorized Tweets")
+            st.subheader("some of the most talked about")
             for category, tweets in categorized_tweets.items():
-                st.write(f"**{category} Engagement:**")
+                st.write(f"**{category} engagement:**")
                 for tweet in tweets[:3]:
                     st.write(f"- {tweet['text'][:100]}...")
             
             trending_topics = content_analyzer.identify_trending_topics([tweet for tweets in categorized_tweets.values() for tweet in tweets])
-            st.subheader("Trending Topics")
+            st.subheader("trending topics")
             st.write(", ".join(trending_topics))
 
 def generate_tweet_ideas():
-    st.header("Generate Tweet Ideas")
-    topic = st.text_input("Enter a topic for tweet ideas:")
-    num_tweets = st.number_input("Number of tweets to generate:", min_value=1, max_value=10, value=3)
-    if st.button("Generate"):
-        with st.spinner("Generating tweet ideas..."):
+    st.header("give me tweet ideas")
+    topic = st.text_input("interests:")
+    num_tweets = st.number_input("how many do you want to generate:", min_value=1, max_value=10, value=3)
+    if st.button("go"):
+        with st.spinner("cooking tweet ideas..."):
             tweet_ideas = content_generator.generate_tweet_thread(topic, num_tweets)
-            st.subheader("Generated Tweet Ideas")
+            st.subheader("here's some ideas")
             for i, idea in enumerate(tweet_ideas, 1):
                 st.write(f"{i}. {idea}")
 
