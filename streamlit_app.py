@@ -32,7 +32,7 @@ content_scheduler = scheduler.ContentScheduler()
 def main():
     st.title("xSage 🧠💰")
 
-    menu = [" Crypto Content", "Generate Tweet Ideas", "Schedule Posts", "View Scheduled Posts"]
+    menu = ["what's hyped right now", "give me tweet ideas", "pencil my posts", "view my posts"]
     choice = st.sidebar.selectbox("Choose an option", menu)
 
     if choice == "what's hyped right now":
@@ -72,14 +72,14 @@ def generate_tweet_ideas():
                 st.write(f"{i}. {idea}")
 
 def schedule_posts():
-    st.header("Schedule Posts")
+    st.header("pencil my posts")
     content_list = []
     for i in range(5):  # Allow up to 5 posts to be scheduled at once
-        content = st.text_area(f"Enter content for post {i+1}:", key=f"post_{i}")
+        content = st.text_area(f"enter content for post {i+1}:", key=f"post_{i}")
         if content:
             content_list.append(content)
     
-    if st.button("Schedule Posts"):
+    if st.button("pencil my posts"):
         if content_list:
             start_date = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
             end_date = start_date + timedelta(days=DEFAULT_SCHEDULE_DAYS)
